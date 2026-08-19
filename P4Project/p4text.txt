@@ -1,0 +1,140 @@
+for(int globalRun = 0; globalRun < listOfP5PossiblePlayableWithOutLastPlayedRemovedPairsGlobal.size(); globalRun++){
+
+            ArrayList<P4[]> listOfP5PossiblePlayableWithOutLastPlayedRemovedPairs = listOfP5PossiblePlayableWithOutLastPlayedRemovedPairsGlobal.get(globalRun);
+            P4[] ppArray = ppArrayListGlobal.get(globalRun);
+            P4[] allCombos = allCombosListGlobal.get(globalRun);
+            /**
+             * Step01..
+             * Use each array listOfP5PossiblePlayableWithOutLastPlayedRemovedPairs to calculate what is not in listOfP5PossiblePlayableWithOutLastPlayedRemovedPairs
+             * Then take the value that is not in and the array from listOfP5PossiblePlayableWithOutLastPlayedRemovedPairs and place in a TwoArrayObject
+             * Then add the two array object to a list
+             */
+
+            now = ZonedDateTime.now(ZoneId.systemDefault());
+            System.out.println("starting step01 now: " + now.format(formatter));
+
+
+            //P5[] checkingForNotIn1 = checkP5In.notInPParrayStrings(null, null,nextPlayed);
+
+            //create a object which has the two arrays in it
+            List<TwoArrayObjects> tao = new ArrayList<>();
+
+            for (int i = 0; i < listOfP5PossiblePlayableWithOutLastPlayedRemovedPairs.size(); i++) {
+                P4[] notInTemp = checkP5In.notInPParray1(ppArray, listOfP5PossiblePlayableWithOutLastPlayedRemovedPairs.get(i));
+                now = ZonedDateTime.now(ZoneId.systemDefault());
+                System.out.println("\tSize of notInTemp array at #" + i + " is: " + notInTemp.length + " execution time: " + now.format(formatter));
+                TwoArrayObjects taoTemp = new TwoArrayObjects(listOfP5PossiblePlayableWithOutLastPlayedRemovedPairs.get(i), notInTemp);
+                tao.add(taoTemp);
+                System.out.println("\t\ttao.get(" + i + ").getOne().length: " + tao.get(i).getOne().length + "tao.get(" + i + ").getTwo().length: " + tao.get(i).getTwo().length);
+            }
+
+            now = ZonedDateTime.now(ZoneId.systemDefault());
+            System.out.println("Finishing step01 now: " + now.format(formatter));
+            minutes = ChronoUnit.MINUTES.between(nowStart, now);
+            hours = minutes / 60;
+            remainingMinutes = minutes % 60;
+            totalSeconds = ChronoUnit.SECONDS.between(nowStart, now);  // convert minutes to seconds
+            seconds = totalSeconds % 60;
+            totalMillis = ChronoUnit.MILLIS.between(nowStart, now); // get total milliseconds
+            millis = totalMillis % 1000; // calculate remaining milliseconds
+            System.out.println("Elapased time from start time: " + hours + " hours and " + remainingMinutes + " minutes " + " " + seconds + " seconds" + " " + millis + " ms\n");
+
+            List<String> uniqueList = new ArrayList<>();
+            P4[] globalUniqueListArrayArray = new P4[0];
+            P4[] dohHaveForSureArray = new P4[0];
+            P4[] halfUniqueListArray = new P4[0];
+            List<TwoArrayObjects> tempTaoFinal = new ArrayList<>();
+            List<TwoArrayObjects> tempTaoFinalEnd = new ArrayList<>();
+            List<P4[]> dohHaveList = new ArrayList<>();
+            int countWhile = 0;
+
+            //variable holders.
+            List<TwoArrayObjects> taoHolder = new ArrayList<>();
+            taoHolder = tao;
+            P4[] globalUniqueListArrayArrayHolder = new P4[0];
+
+            List<TwoArrayObjects> tempTaoFinalEndHolder = new ArrayList<>();
+            List<List<P4[]>> listOfP5ArrayNotInList = new ArrayList<>();
+            for (int finalRunTest = 0; finalRunTest < 10; finalRunTest++) {
+                boolean whileRun = true;
+                P4 arraysOfRandFromPPArrayToCheckHolder[] = new P4[0];
+                List<P4[]> p5ArrayNotInList = new ArrayList<>();
+                while (whileRun == true) {
+                    tao = taoHolder;
+                    if (finalRunTest != 0) {
+                        globalUniqueListArrayArray = globalUniqueListArrayArrayHolder;
+                    }
+
+                    while ((uniqueList.size() == 0 || uniqueList.size() > endWhile) && countWhile < 1) {
+                        if (uniqueList.size() != 0) {
+                            tao = new ArrayList<>();
+                            tao = tempTaoFinal;
+                        }
+
+
+                        /**
+                         * Step1.5
+                         */
+                        now = ZonedDateTime.now(ZoneId.systemDefault());
+                        System.out.println("starting step1.5 now: " + now.format(formatter));
+                        //CheckP5In checkP5In= new CheckP5In();
+                        //create a object which has the two arrays in it
+                        // List<TwoArrayObjects> tao = new ArrayList<>();
+
+                        boolean taoOneNotNull = false;
+                        for (int i = 0; i < tao.size(); i++) {
+
+                            for (int j = 0; j < tao.get(i).getTwo().length; j++) {
+                                if (tao.get(i).getTwo()[j] != null) {
+                                    tao.get(i).getTwo()[j].setValue(i);
+                                    taoOneNotNull = true;
+                                }
+
+                            }
+
+                            boolean taoTwoNotNull = false;
+                            for (int j = 0; j < tao.get(i).getOne().length; j++) {
+                                if (tao.get(i).getOne()[j] != null) {
+                                    tao.get(i).getOne()[j].setValue(i);
+                                    taoTwoNotNull = true;
+                                }
+
+                            }
+
+                            if (taoOneNotNull == true && taoTwoNotNull == true) {
+                                P4[] notInTemp = checkP5In.notInPParray1(tao.get(i).getTwo(), tao.get(i).getOne(), allCombos, countWhile, nextPlayed);
+//                if(countWhile > 0){
+//                    notInTemp = new P5[0];
+//                    notInTemp = tao.get(i).getTwo();
+//                }
+                                P4[] notInTempMerged = checkP5In.mergeP4Arrays(tao.get(i).getOne(), notInTemp);
+                                if (countWhile > 0) {
+                                    notInTempMerged = new P4[0];
+                                    notInTempMerged = tao.get(i).getOne();
+                                }
+                                now = ZonedDateTime.now(ZoneId.systemDefault());
+                                System.out.println("\tSize of notInTemp array at #" + i + " of " + tao.size() + " is: " + notInTemp.length + " and has value: " + checkP5In.hasValue(notInTempMerged, nextPlayed) + " execution time: " + now.format(formatter) + " slow");
+
+                                //TwoArrayObjects taoTemp = new TwoArrayObjects(listOfP5PossiblePlayableWithOutLastPlayedRemovedPairs.get(i), notInTemp);
+                                //tao.add(taoTemp);
+                                tao.get(i).setOne(notInTempMerged);
+                            }
+                        }
+
+                        now = ZonedDateTime.now(ZoneId.systemDefault());
+                        System.out.println("Finishing step01.5 now: " + now.format(formatter));
+                        minutes = ChronoUnit.MINUTES.between(nowStart, now);
+                        hours = minutes / 60;
+                        remainingMinutes = minutes % 60;
+                        totalSeconds = ChronoUnit.SECONDS.between(nowStart, now);  // convert minutes to seconds
+                        seconds = totalSeconds % 60;
+                        totalMillis = ChronoUnit.MILLIS.between(nowStart, now); // get total milliseconds
+                        millis = totalMillis % 1000; // calculate remaining milliseconds
+                        System.out.println("Elapased time from start time: " + hours + " hours and " + remainingMinutes + " minutes " + " " + seconds + " seconds" + " " + millis + " ms\n");
+
+
+
+                    }//end while UniqueList.
+                }//end whileRun
+            }//end finalRunTest.
+        }//end of globalRun affter create List of 10 Logic Step

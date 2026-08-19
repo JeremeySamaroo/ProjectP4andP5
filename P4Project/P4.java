@@ -84,10 +84,20 @@ public class P4 {
 
         int count = 0;
 
-        for (int i = 0; i < choices.length - 3; i++) {
-            for (int j = i + 1; j < choices.length - 2; j++) {
-                for (int k = j + 1; k < choices.length - 1; k++) {
-                    for (int l = k + 1; l < choices.length; l++) {
+//        for (int i = 0; i < choices.length - 3; i++) {
+//            for (int j = i + 1; j < choices.length - 2; j++) {
+//                for (int k = j + 1; k < choices.length - 1; k++) {
+//                    for (int l = k + 1; l < choices.length; l++) {
+//                        count++;
+//                    }
+//                }
+//            }
+//        }
+
+        for(int i = 0; i < choices.length; i++){
+            for(int j = 0; j < choices.length; j++){
+                for(int k = 0; k < choices.length; k++){
+                    for(int l = 0; l < choices.length; l++) {
                         count++;
                     }
                 }
@@ -101,10 +111,10 @@ public class P4 {
 
         int count = 0;
 
-        for (int i = 0; i < choices.length - 3; i++) {
-            for (int j = i + 1; j < choices.length - 2; j++) {
-                for (int k = j + 1; k < choices.length - 1; k++) {
-                    for (int l = k + 1; l < choices.length; l++) {
+        for(int i = 0; i < choices.length; i++){
+            for(int j = 0; j < choices.length; j++){
+                for(int k = 0; k < choices.length; k++){
+                    for(int l = 0; l < choices.length; l++) {
 
                         allCombos[count] =
                                 new P4(choices[i], choices[j], choices[k], choices[l]);
